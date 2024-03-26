@@ -33,7 +33,3 @@
   .mySwiper2 .swiper-pagination-bullet-active{
     background: #000;
   }
-  .mySwiper2 .swiper-pagination{
-    top: 67% !important;
-    bottom: 28% !important;
-  }

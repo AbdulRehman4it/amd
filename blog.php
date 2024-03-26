@@ -5,42 +5,83 @@
   <?php
      require_once('./inc/nav.php');
      ?>
+
+
+
     <section class="p-[5%]">
       <img src="./assets/img/google-add.png" class="w-full" alt="" />
     </section>
+
+  
+  
+  
+    <!-- ======================SLIDER DIOR START HERE=============== -->
+<?php
+// Check if the blog_id parameter is set in the URL
+if (isset($_GET['cat_id'])) {
+    // Retrieve the blog_id from the URL
+    $specific_id = $_GET['blog_id'];
+
+    // Proceed with fetching data for the specific ID
+    $query = "SELECT * FROM blogs WHERE id = $specific_id"; // Modify the query to fetch data for the specific ID
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        if (mysqli_num_rows($result) > 0) {
+            // Fetch data for the specific ID
+            $row = mysqli_fetch_assoc($result);
+
+            // Retrieve date, title, and category
+            $date = date('M d, Y', strtotime($row['date']));
+            $title = $row['first_title'] . ' ' . $row['second_title'] . ' ' . $row['third_title'];
+            $category = $row['categories'];
+            $blog_data = isset($row['blog_data']) ? $row['blog_data'] : ''; // Check if blog_data is not null
+
+            ?>
     <section>
       <!-- Swiper -->
       <div class="swiper mySwiper2">
         <div class="swiper-wrapper">
+        <?php
+                        // Loop through image columns
+                        for ($i = 0; $i <= 5; $i++) {
+                            $image_column = ($i == 0) ? 'image' : 'image' . $i;
+                            // Check if the image column exists and is not empty
+                            if (!empty($row[$image_column])) {
+                                ?>
           <div class="swiper-slide">
             <div
-              class="bg-[url('./assets/img/blog-hero.png')] h-screen bg-cover bg-no-repeat flex items-end justify-center"
+              class="bg-[url('./assets/img/<?php echo $row[$image_column]; ?>')] h-screen bg-cover bg-no-repeat flex items-end justify-center"
             >
               <div class="pb-8">
                 <p class="text-2xl nimbusl-regular text-[#ffffff]">
-                  Source : Fashion Collection
+                  Source : <?php echo $category; ?> Collection
                 </p>
               </div>
             </div>
-            <div class="p-[5%]">
+           
+          </div>
+          <?php
+                            }
+                        }
+                        ?>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+      <div class="p-[5%]">
               <div
                 class="text-xl nimbusl-bold text-[#AEAEAE] flex items-center gap-10 border-b border-[#A4A4A4]"
               >
-                <p>Sep 2 , 2022</p>
+                <p><?php echo $date; ?></p>
                 <ul class="list-disc">
-                  <li>Fashion</li>
+                  <li><?php echo $category; ?></li>
                 </ul>
               </div>
               <h1 class="text-black text-6xl nimbusl-bold py-3">
-                FENDI <span class="ogg">X <i>BENZEMA</i> </span>
+              <?php echo $row['first_title'];?> <span class="ogg"><?php echo $row['second_title'];?> <i><?php echo $row['third_title'];?></i> </span>
               </h1>
               <p class="text-xl leading-[34px] text-[#A4A4A4] nimbusl-regular">
-                The new Official FENDI Faster Ambassador, Benzema embodies the
-                progressive spirit of the Maison's latest sneaker design – as a
-                world-beating athlete with Real Madrid and recently UEFA Men’s
-                Player of the Year, Karim is known as an exemplary player and a
-                true professional, making the decorated striker an ideal
-                ambassador for the FENDI Faster.
+              <?php echo $blog_data; ?>
               </p>
               <a href="./single-blog.html">
                 <button
@@ -50,136 +91,18 @@
                 </button>
               </a>
             </div>
-          </div>
-          <div class="swiper-slide">
-            <div
-              class="bg-[url('./assets/img/blog-hero.png')] h-screen bg-cover bg-no-repeat flex items-end justify-center"
-            >
-              <div class="pb-8">
-                <p class="text-2xl nimbusl-regular text-[#ffffff]">
-                  Source : Fashion Collection
-                </p>
-              </div>
-            </div>
-            <div class="p-[5%]">
-              <div
-                class="text-xl nimbusl-bold text-[#AEAEAE] flex items-center gap-10 border-b border-[#A4A4A4]"
-              >
-                <p>Sep 2 , 2022</p>
-                <ul class="list-disc">
-                  <li>Fashion</li>
-                </ul>
-              </div>
-              <h1 class="text-black text-6xl nimbusl-bold py-3">
-                FENDI <span class="ogg">X <i>BENZEMA</i> </span>
-              </h1>
-              <p class="text-xl leading-[34px] text-[#A4A4A4] nimbusl-regular">
-                The new Official FENDI Faster Ambassador, Benzema embodies the
-                progressive spirit of the Maison's latest sneaker design – as a
-                world-beating athlete with Real Madrid and recently UEFA Men’s
-                Player of the Year, Karim is known as an exemplary player and a
-                true professional, making the decorated striker an ideal
-                ambassador for the FENDI Faster.
-              </p>
-              <a href="./single-blog.html">
-                <button
-                  class="px-16 py-3 text-lg text-white nimbusl-regular bg-black mt-8"
-                >
-                  Read More
-                </button>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="swiper-pagination"></div>
-      </div>
     </section>
-    <section>
-      <!-- Swiper -->
-      <div class="swiper mySwiper2">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <div
-              class="bg-[url('./assets/img/dior-blog.png')] h-screen bg-cover bg-no-repeat flex items-end justify-center"
-            >
-              <div class="pb-8">
-                <p class="text-2xl nimbusl-regular text-[#ffffff]">
-                  Source : Fashion Collection
-                </p>
-              </div>
-            </div>
-            <div class="p-[5%]">
-              <div
-                class="text-xl nimbusl-bold text-[#AEAEAE] flex items-center gap-10 border-b border-[#A4A4A4]"
-              >
-                <p>Sep 2 , 2022</p>
-                <ul class="list-disc">
-                  <li>Fashion</li>
-                </ul>
-              </div>
-              <h1 class="text-black text-6xl nimbusl-bold py-3">
-                DIOR DIOR <span class="ogg"><i>DIOR</i> </span>
-              </h1>
-              <p class="text-xl leading-[34px] text-[#A4A4A4] nimbusl-regular">
-                The new Official FENDI Faster Ambassador, Benzema embodies the
-                progressive spirit of the Maison's latest sneaker design – as a
-                world-beating athlete with Real Madrid and recently UEFA Men’s
-                Player of the Year, Karim is known as an exemplary player and a
-                true professional, making the decorated striker an ideal
-                ambassador for the FENDI Faster.
-              </p>
-              <a href="">
-                <button
-                  class="px-16 py-3 text-lg text-white nimbusl-regular bg-black mt-8"
-                >
-                  Read More
-                </button>
-              </a>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div
-              class="bg-[url('./assets/img/dior-blog.png')] h-screen bg-cover bg-no-repeat flex items-end justify-center"
-            >
-              <div class="pb-8">
-                <p class="text-2xl nimbusl-regular text-[#ffffff]">
-                  Source : Fashion Collection
-                </p>
-              </div>
-            </div>
-            <div class="p-[5%]">
-              <div
-                class="text-xl nimbusl-bold text-[#AEAEAE] flex items-center gap-10 border-b border-[#A4A4A4]"
-              >
-                <p>Sep 2 , 2022</p>
-                <ul class="list-disc">
-                  <li>Fashion</li>
-                </ul>
-              </div>
-              <h1 class="text-black text-6xl nimbusl-bold py-3">
-                DIOR DIOR <span class="ogg"><i>DIOR</i> </span>
-              </h1>
-              <p class="text-xl leading-[34px] text-[#A4A4A4] nimbusl-regular">
-                The new Official FENDI Faster Ambassador, Benzema embodies the
-                progressive spirit of the Maison's latest sneaker design – as a
-                world-beating athlete with Real Madrid and recently UEFA Men’s
-                Player of the Year, Karim is known as an exemplary player and a
-                true professional, making the decorated striker an ideal
-                ambassador for the FENDI Faster.
-              </p>
-              <a href="">
-                <button
-                  class="px-16 py-3 text-lg text-white nimbusl-regular bg-black mt-8"
-                >
-                  Read More
-                </button>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="swiper-pagination"></div>
-      </div>
-    </section>
+    <?php
+        } else {
+            echo "<p>No related blogs found.</p>";
+        }
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
+} else {
+    echo "No blog ID specified.";
+}
+?>
     <section class="py-[5%] px-[15%]">
       <img src="./assets/img/google-add.png" class="w-full" alt="" />
     </section>
@@ -209,92 +132,7 @@
         </h1>
       </div>
     </section>
-    <section class="pt-32">
-        <!-- Swiper -->
-        <div class="swiper mySwiper2">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div
-                class="bg-[url('./assets/img/valentino-blog.png')] h-screen bg-cover bg-no-repeat flex items-end justify-center"
-              >
-                <div class="pb-8">
-                  <p class="text-2xl nimbusl-regular text-[#ffffff]">
-                    Source : Fashion Collection
-                  </p>
-                </div>
-              </div>
-              <div class="p-[5%]">
-                <div
-                  class="text-xl nimbusl-bold text-[#AEAEAE] flex items-center gap-10 border-b border-[#A4A4A4]"
-                >
-                  <p>Sep 2 , 2022</p>
-                  <ul class="list-disc">
-                    <li>Fashion</li>
-                  </ul>
-                </div>
-                <h1 class="text-black text-6xl nimbusl-bold py-3">
-                    Valentino in <span class="ogg"><i>Milano</i> </span>
-                </h1>
-                <p class="text-xl leading-[34px] text-[#A4A4A4] nimbusl-regular">
-                  The new Official FENDI Faster Ambassador, Benzema embodies the
-                  progressive spirit of the Maison's latest sneaker design – as a
-                  world-beating athlete with Real Madrid and recently UEFA Men’s
-                  Player of the Year, Karim is known as an exemplary player and a
-                  true professional, making the decorated striker an ideal
-                  ambassador for the FENDI Faster.
-                </p>
-                <a href="">
-                  <button
-                    class="px-16 py-3 text-lg text-white nimbusl-regular bg-black mt-8"
-                  >
-                    Read More
-                  </button>
-                </a>
-              </div>
-            </div>
-            <div class="swiper-slide">
-                <div
-                  class="bg-[url('./assets/img/valentino-blog.png')] h-screen bg-cover bg-no-repeat flex items-end justify-center"
-                >
-                  <div class="pb-8">
-                    <p class="text-2xl nimbusl-regular text-[#ffffff]">
-                      Source : Fashion Collection
-                    </p>
-                  </div>
-                </div>
-                <div class="p-[5%]">
-                  <div
-                    class="text-xl nimbusl-bold text-[#AEAEAE] flex items-center gap-10 border-b border-[#A4A4A4]"
-                  >
-                    <p>Sep 2 , 2022</p>
-                    <ul class="list-disc">
-                      <li>Fashion</li>
-                    </ul>
-                  </div>
-                  <h1 class="text-black text-6xl nimbusl-bold py-3">
-                      Valentino in <span class="ogg"><i>Milano</i> </span>
-                  </h1>
-                  <p class="text-xl leading-[34px] text-[#A4A4A4] nimbusl-regular">
-                    The new Official FENDI Faster Ambassador, Benzema embodies the
-                    progressive spirit of the Maison's latest sneaker design – as a
-                    world-beating athlete with Real Madrid and recently UEFA Men’s
-                    Player of the Year, Karim is known as an exemplary player and a
-                    true professional, making the decorated striker an ideal
-                    ambassador for the FENDI Faster.
-                  </p>
-                  <a href="">
-                    <button
-                      class="px-16 py-3 text-lg text-white nimbusl-regular bg-black mt-8"
-                    >
-                      Read More
-                    </button>
-                  </a>
-                </div>
-              </div>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-      </section>
+   
     <section class="py-[5%] px-[15%]">
       <img src="./assets/img/google-add.png" class="w-full" alt="" />
     </section>
