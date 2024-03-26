@@ -1,0 +1,177 @@
+.bg-color{
+    /* --main-bg:#e9e9e9; */
+    background: linear-gradient(#690065, #001c69);
+    background: -o-linear-gradient(#690065, #001c69);
+    background: -moz-linear-gradient(#690065, #001c69);
+    background: -webkit-linear-gradient(#690065, #001c69);
+  }
+  
+  /* .main-bg {
+    background: var(--main-bg) !important;
+  }
+   */
+  input:focus, button:focus {
+    border: 1px solid var(--main-bg) !important;
+    box-shadow: none !important;
+
+  }
+  
+  .form-check-input:checked {
+    background-color: var(--main-bg) !important;
+    border-color: var(--main-bg) !important;
+  }
+  
+  .card, .btn, input{
+    border-radius:0px !important;
+  }
+    .card{
+    border-radius:7px !important;
+  }
+  html, body{
+    height: 100%;
+  }
+  .body-section{
+    padding-top: 30px;
+    padding-bottom: 70px;
+  }
+  a{
+    color: black;
+    text-decoration: none;
+  }
+  .scp-breadcrumb{
+    background-color: rgb(214, 214, 214);
+  
+  }
+  .huge{
+    font-size: 40px;
+  }
+  /* panel primary */
+ .tag-boxes .panel, .panel-footer{
+    border: 1px solid #2FA4E7;
+  border-radius: 3px;  
+  
+ }
+ .tag-boxes .panel-footer{
+  color: #2FA4E7;
+ }
+
+/* panel red */
+
+ .tag-boxes .panel-red{
+  background-color: #d9534f;
+  border: 1px solid #d9534f;
+  border-radius:2px ;
+ }
+ .tag-boxes  .panel-red-footer{
+  color: #d9534f;
+  border: 1px solid #d9534f;
+  border-radius:3px ;
+ }
+ .tag-boxes  .panel-red-footer:hover{
+ color: #b52b27;
+ }
+/* panel yallow */
+ .tag-boxes .panel-yellow{
+  background-color: #f0ad4e;
+  border: 1px solid #f0ad4e;
+  border-radius:2px ;
+ }
+ .tag-boxes  .panel-yellow-footer{
+  color: #f0ad4e;
+  border: 1px solid #f0ad4e;
+  border-radius:3px ;
+ }
+ .tag-boxes  .panel-yellow-footer:hover{
+ color: #df8a13;
+ }
+ 
+/* panel green */
+ .tag-boxes .panel-green{
+  background-color: #5cb85c;
+  border: 1px solid #5cb85c;
+  border-radius:2px ;
+ }
+ .tag-boxes  .panel-green-footer{
+  color: #5cb85c;
+  border: 1px solid #5cb85c;
+  border-radius:3px ;
+ }
+ .tag-boxes  .panel-green-footer:hover{
+ color: #3d8b3d;
+ }
+
+ #wrapper{
+  min-height: 100%;
+  position: relative;
+
+}
+ /* footer starts here */
+ footer{
+  background-color: #2FA4E7;
+  color: white;
+  height: 50px;
+  line-height: 50px;
+  font-size: 13px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+footer a{
+  font-weight: bold;
+}
+footer a:hover{
+  color: white;
+  text-decoration: underline;
+}
+
+/* form{
+  background: #021725;
+}
+.form-r > input, textarea, select, option{
+  background: none !important;
+  border-top: #FFCC33 1px solid !important;
+  border-left: #FFCC33 1px solid !important;
+  border-bottom: #FFCC33 3px solid !important;
+  border-right: #FFCC33 3px solid !important;
+  border-radius: 2px !important;
+  color: #FFCC33 !important;
+} */
+.input-field{
+    border-radius: 4px !important;
+    border: none;
+    padding: 7px;
+    width: 100% !important;
+    background-color: white;
+    /* border-color: rgb(156, 156, 156); */
+}
+.input-field2{
+  border-radius: 4px !important;
+  border: none;
+  padding: 7px;
+  width: 100% !important;
+  
+}
+.controls{
+  /* border-color: rgb(156, 156, 156) !important; */
+  color:   rgb(214, 213, 213);
+}
+.input-field1{
+  border-radius: 4px !important;
+  border: none;
+  padding: 7px;
+  width: 100% !important;
+ 
+}
+
+
+.control-group{
+  color:  rgb(95, 95, 95) !important;
+}
+.card{
+  border: 1px solid rgb(107, 105, 105);
+  background-color: #e8edf1;
+}
+.card:hover{
+  box-shadow: 2px 2px  2px 2px;
+  color: #818a91;
+}

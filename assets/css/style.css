@@ -1,0 +1,39 @@
+@font-face {
+    font-family: nimbusl-bold;
+    src: url(../fonts/NimbusSanL-Bold.ttf);
+  }
+  @font-face {
+    font-family: nimbusl-regular;
+    src: url(../fonts/NimbusSanL-Regu.ttf);
+  }
+  @font-face {
+    font-family: ogg;
+    src: url(../fonts/OggText-Book.ttf);
+  }
+  .nimbusl-bold{
+    font-family: nimbusl-bold;
+  }
+  .nimbusl-regular{
+    font-family: nimbusl-regular;
+  }
+  .ogg{
+    font-family: ogg;
+  }
+  .mySwiper .swiper-pagination-bullet, .mySwiper3 .swiper-pagination-bullet{
+    background: #ffffffc9;
+  }
+  .mySwiper .swiper-pagination-bullet-active, .mySwiper3 .swiper-pagination-bullet{
+    background: #fff;
+  }
+
+
+  .mySwiper2 .swiper-pagination-bullet{
+    background: #000000b2;
+  }
+  .mySwiper2 .swiper-pagination-bullet-active{
+    background: #000;
+  }
+  .mySwiper2 .swiper-pagination{
+    top: 67% !important;
+    bottom: 28% !important;
+  }
