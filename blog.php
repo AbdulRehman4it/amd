@@ -19,11 +19,18 @@
 <?php
 // Check if the blog_id parameter is set in the URL
 if (isset($_GET['cat_id'])) {
-    // Retrieve the blog_id from the URL
-    $specific_id = $_GET['blog_id'];
+
+  $cat_id = $_GET['cat_id'];
+        $cat_query = "SELECT * FROM categories WHERE id = $cat_id";
+        $cat_run = mysqli_query($conn, $cat_query);
+        $cat_row = mysqli_fetch_array($cat_run);
+        $cat_name = $cat_row['category']; 
+
+    // // Retrieve the blog_id from the URL
+    // $specific_id = $_GET['cat_id'];
 
     // Proceed with fetching data for the specific ID
-    $query = "SELECT * FROM blogs WHERE id = $specific_id"; // Modify the query to fetch data for the specific ID
+    $query = "SELECT * FROM blogs WHERE categories = '$cat_name'"; // Modify the query to fetch data for the specific ID
     $result = mysqli_query($conn, $query);
 
     if ($result) {
@@ -38,6 +45,12 @@ if (isset($_GET['cat_id'])) {
             $blog_data = isset($row['blog_data']) ? $row['blog_data'] : ''; // Check if blog_data is not null
 
             ?>
+
+
+<?php
+                       while ($row = mysqli_fetch_assoc($result)) {
+                      ?> 
+
     <section>
       <!-- Swiper -->
       <div class="swiper mySwiper2">
@@ -92,6 +105,12 @@ if (isset($_GET['cat_id'])) {
               </a>
             </div>
     </section>
+
+    <?php
+                            }
+                            ?>
+
+
     <?php
         } else {
             echo "<p>No related blogs found.</p>";

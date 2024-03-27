@@ -38,7 +38,7 @@
        // Display the first blog
        ?>
 
-
+<a href="./blog.php?cat_id=<?php echo $cat_id?>">
     <section
       class="bg-[url('./assets/img/her-bg.png')] h-screen bg-cover bg-no-repeat flex items-end"
     >
@@ -65,7 +65,7 @@
         </h1>
       </div>
     </section>
-
+</a>
     <?php
     } else {
         echo "<h2 class='text-back'>No Blogs Available</h2>";
@@ -204,7 +204,7 @@
             // Your code to display the remaining blogs goes here
             ?>
 
-
+<a href="./blog.php?cat_id=<?php echo $cat_id?>">
     <section
       class="bg-[url('./assets/img/<?php echo $row['image']; ?>')] h-screen bg-cover bg-no-repeat flex items-end"
     >
@@ -229,6 +229,7 @@
         </h1>
       </div>
     </section>
+        </a>
     <?php
         }
     } else {
