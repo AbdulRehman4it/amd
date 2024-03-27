@@ -3,7 +3,17 @@
 
 <!------ top section ------>
 
-<?php require_once('inc/top.php')?>
+<?php require_once('inc/top.php');
+
+
+
+
+require_once('./authentication.php');
+
+
+?>
+
+
   </head>
   <body>
     <div id="wrapper">
@@ -19,10 +29,26 @@
           </div>
 
           <div class="col-md-9">
+            <div class="d-flex align-items-center">
             <h1>
               <i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard
-              <small>Statistics Overview</small>
+              <!-- <small>Statistics Overview</small> -->
             </h1>
+            <h5 class="ms-4 mt-3">Statistics Overview</h5>
+            </div>
+
+
+
+            <?php 
+              if(isset($_SESSION['status'])){
+                  ?>
+                  <h5><?=$_SESSION['status']?></h5>
+                  <?php
+                  unset(
+                  $_SESSION['status']
+                  );
+              }
+              ?>
             <hr />
             <div class="scp-breadcrumb">
               <ol class="breadcrumb">
