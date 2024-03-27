@@ -2,7 +2,11 @@
 <?php require_once('inc/db.php');?>
 
 <!-- top section -->
-<?php require_once('inc/top.php');?>
+<?php require_once('inc/top.php');
+
+
+require_once('./authentication.php');
+?>
   </head>
 
 <!-- delete category from database -->
@@ -24,6 +28,20 @@
 // }
 
 ?>
+
+<?php 
+              if(isset($_SESSION['status'])){
+                  ?>
+                  <div class="alert alert-success">
+                  <h4><?=$_SESSION['status']?></h4>
+                  </div>
+                  <?php
+                  unset(
+                  $_SESSION['status']
+                  );
+              }
+              ?>
+
   <body>
     <div id="wrapper">
      <!-- navbar section -->
@@ -123,10 +141,9 @@
 											$second_title = $_POST['second_title'];
 											$third_title = $_POST['third_title'];
 											$author = $_POST['author'];
-											// $author_image = $_POST['author_image'];
-											// $image = $_POST['image'];
-                      // $filename=$_POST['author_image'];
-											$categories = $_POST['categories'];
+									
+											// $categories = $_POST['categories'];
+                      $category_id = $_POST['categories'];
 											$blog_data = $_POST['blog_data'];
 											$blog_data2 = $_POST['blog_data2'];
 									
@@ -140,8 +157,9 @@
 										</script>
 										<?php
 										}else{
-                      mysqli_query($conn,"INSERT INTO `blogs`( `date`, `first_title`, `second_title`, `third_title`, `author`, `image`,`image2`, `image3`, `image4`, `image5`,  `categories`, `blog_data`,`blog_data2`) 
-                      values('$date','$first_title','$second_title','$third_title','$author','$image_filename','$image2_filename','$image3_filename','$image4_filename','$image5_filename', '$categories','$blog_data','$blog_data2')") or die(mysqli_error($conn));
+                      mysqli_query($conn,"INSERT INTO `blogs`( `date`, `first_title`, `second_title`, `third_title`, `author`, `image`,`image2`, `image3`, `image4`, `image5`,   `categories_id`, `blog_data`,`blog_data2`) 
+                      values('$date','$first_title','$second_title','$third_title','$author','$image_filename','$image2_filename','$image3_filename','$image4_filename','$image5_filename', '$category_id','$blog_data','$blog_data2')") 
+                      or die(mysqli_error($conn));
 
                       // mysqli_query($conn,"insert into activity_log (date,username,action) values(NOW(),'$user_username','Add Subject $course_name')")or die(mysqli_error());
                       
@@ -169,7 +187,7 @@
                                   <div class="control-group">
                                       <label class="control-label" for="inputEmail"><b>Date</b></label>
                                       <div class="controls">
-                                      <input class="input-field mt-2" type="text" name="date" id="inputEmail" placeholder=" Enter Date"  value="<?php  if(isset ($date)){echo $date;}?> ">
+                                      <input class="input-field mt-2" type="date" name="date" id="inputEmail" placeholder=" Enter Date"  value="<?php  if(isset ($date)){echo $date;}?> ">
                                       </div>
                                   </div>
                               </div>
@@ -238,7 +256,6 @@
                              
                     </div>
 
-
                     <div class="row mt-3">
                             <div class="col-md-12">
                             <div class="control-group">
@@ -280,19 +297,31 @@
                              
                     </div>
 
-                  
 
-                   
                     <div class="row mt-3">
                       <div class="col-md-12">
-                        <div class="control-group">
-                            <label class="control-label" for="inputPassword"><b>categories</b></label>
-                            <div class="controls">
-                            <input class="input-field1 mt-2" type="text" class="span8" name="categories" value="<?php  if(isset ($categories)){echo $categories;}?>"id="inputPassword" placeholder="Categories" required>
-                            </div>
-                        </div>
-                       </div>
-                    </div>
+                          <div class="control-group">
+                              <label class="control-label" for="categories"><b>Categories</b></label>
+                              <div class="controls">
+                                  <select class="input-field1 mt-2" name="categories" id="categories" required>
+                                      <?php
+                                      $query = "SELECT * FROM categories";
+                                      $result = mysqli_query($conn, $query);
+                                      if(mysqli_num_rows($result) > 0) {
+                                          while($row = mysqli_fetch_assoc($result)) {
+                                              $category_id = $row['id'];
+                                              $category_name = $row['category'];
+                                              echo "<option value='$category_id'>$category_name</option>";
+                                          }
+                                      }
+                                      ?>
+                                  </select>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+
 
                      <div class="row mt-3">
                        <div class="col-md-12">
