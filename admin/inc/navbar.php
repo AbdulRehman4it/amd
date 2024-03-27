@@ -34,7 +34,7 @@
                 </a>
               </li>
               <li class="nav-item me-3">
-                <a class="nav-link active" href="#">
+              <a class="nav-link active" href="./logout.php">
                   <i class="fa fa-power-off" aria-hidden="true"></i> Logout
                 </a>
               </li>

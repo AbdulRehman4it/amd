@@ -2,15 +2,7 @@
 
 session_start();
 
-
-if(isset($_SESSION['authenticated'])){
-  $_SESSION['status'] = "You Are Already Login.!";
-  header( "Location: ./index.php");
-  exit(0);
-
-}
-
-$web_title = "Login Page";
+$page_title = "Password Reset";
 
 
 include('inc/top.php');
@@ -39,28 +31,19 @@ include('inc/top.php');
         <div class="card shadow">
           <div class="card-header">
             <h5>
-              Login Form
+              Reset Password
             </h5>
           </div>
           <div class="card-body">
-            <form action="logincode.php" method="post">
+            <form action="password-reset-code.php" method="post">
               <div class="form-group mb-3">
                 <label for="email">Email:</label>
-                <input type="text" id="email" name="email" class="form-control">
-              </div>
-              <div class="form-group mb-3">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" class="form-control">
+                <input type="text" id="email" name="email" placeholder="Enter Email Address" class="form-control">
               </div>
               <div class="form-group">
-                <button type="submit" name="login-now-btn" class="btn btn-primary">Login Now</button>
-                <a href="password-reset.php" class="float-end">Forgot Your Password</a>
+                <button type="submit" name="pass-res-btn" class="btn btn-primary">Send Password Reset Link</button>
               </div>
             </form>
-            <hr>
-            <h6>Did Not Recieve Your Verification Email?
-              <a href="./resend-email-verification.php">Resend</a>
-            </h6>
           </div>
         </div>
       </div>
@@ -69,8 +52,6 @@ include('inc/top.php');
 </div>
 
 <?php 
-
-// include('inc/footer.php')
 
 require_once('inc/footer.php');
 
