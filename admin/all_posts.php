@@ -136,14 +136,28 @@ require_once('./authentication.php');
 
                       
 
+                      $video_filename = $_FILES['video']['name'];
+                      $video_tmp_name = $_FILES['video']['tmp_name'];
+                      $video_folder = '../assets/imgs/'; // Update the folder path for videos
+                      move_uploaded_file($video_tmp_name, $video_folder . $video_filename);
+
+
+
+
 											$date = date('Y-m-d',strtotime($_POST['date']));
 											$first_title = $_POST['first_title'];
 											$second_title = $_POST['second_title'];
 											$third_title = $_POST['third_title'];
 											$author = $_POST['author'];
 									
+
+                      $category_name = $_POST['categories'];
+
+                      // Split the category data into ID and name
+                      $category_data = explode('|', $category_name);
+                      $category_id = $category_data[0];
 											// $categories = $_POST['categories'];
-                      $category_id = $_POST['categories'];
+                      // $category_id = $_POST['categories'];
 											$blog_data = $_POST['blog_data'];
 											$blog_data2 = $_POST['blog_data2'];
 									
@@ -157,9 +171,9 @@ require_once('./authentication.php');
 										</script>
 										<?php
 										}else{
-                      mysqli_query($conn,"INSERT INTO `blogs`( `date`, `first_title`, `second_title`, `third_title`, `author`, `image`,`image2`, `image3`, `image4`, `image5`,   `categories_id`, `blog_data`,`blog_data2`) 
-                      values('$date','$first_title','$second_title','$third_title','$author','$image_filename','$image2_filename','$image3_filename','$image4_filename','$image5_filename', '$category_id','$blog_data','$blog_data2')") 
-                      or die(mysqli_error($conn));
+                      mysqli_query($conn, "INSERT INTO `blogs` (`date`, `first_title`, `second_title`, `third_title`, `author`, `image`, `image2`, `image3`, `image4`, `image5`, `categories_id`, `categories`, `video`, `blog_data`, `blog_data2`) 
+                    VALUES ('$date', '$first_title', '$second_title', '$third_title', '$author', '$image_filename', '$image2_filename', '$image3_filename', '$image4_filename', '$image5_filename', '$category_id', '$category_name', '$video_filename', '$blog_data', '$blog_data2')") 
+                    or die(mysqli_error($conn));
 
                       // mysqli_query($conn,"insert into activity_log (date,username,action) values(NOW(),'$user_username','Add Subject $course_name')")or die(mysqli_error());
                       
@@ -177,6 +191,8 @@ require_once('./authentication.php');
                   <div class="col-md-12">
               <form class="form-horizontal" method="post"  enctype="multipart/form-data">
 
+
+              <input type="hidden" name="categories" value="<?php echo $category_name; ?>">
                     <!-- <div class="control-group">
                     <div class="controls">
                     <input name="image" class="input-file uniform_on" id="fileInput" type="file" required>
@@ -224,7 +240,7 @@ require_once('./authentication.php');
                     <div class="control-group">
                         <label class="control-label" for="inputEmail"><b>Author</b></label>
                         <div class="controls">
-                        <input  class="input-field1 mt-2" type="text" name="author" id="inputEmail" value="<?php  if(isset ($author)){echo $author;}?>" placeholder="Title">
+                        <input  class="input-field1 mt-2" type="text" name="author" id="inputEmail" value="<?php  if(isset ($author)){echo $author;}?>" placeholder="Author">
                         </div>
                     </div>
                     </div>
@@ -303,25 +319,40 @@ require_once('./authentication.php');
                           <div class="control-group">
                               <label class="control-label" for="categories"><b>Categories</b></label>
                               <div class="controls">
-                                  <select class="input-field1 mt-2" name="categories" id="categories" required>
-                                      <?php
-                                      $query = "SELECT * FROM categories";
-                                      $result = mysqli_query($conn, $query);
-                                      if(mysqli_num_rows($result) > 0) {
-                                          while($row = mysqli_fetch_assoc($result)) {
-                                              $category_id = $row['id'];
-                                              $category_name = $row['category'];
-                                              echo "<option value='$category_id'>$category_name</option>";
-                                          }
-                                      }
-                                      ?>
-                                  </select>
+                              <select class="input-field1 mt-2" name="categories" id="categories" required>
+    <?php
+    $query = "SELECT * FROM categories";
+    $result = mysqli_query($conn, $query);
+    if(mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            $category_id = $row['id'];
+            $category_name = $row['category'];
+            echo "<option value='$category_id|$category_name'>$category_name</option>";
+        }
+    }
+    ?>
+</select>
+
                               </div>
                           </div>
                       </div>
                   </div>
 
 
+
+                  <!-- video  -->
+                  <div class="row mt-3">
+                            <div class="col-md-12">
+                            <div class="control-group">
+                                <label class="control-label" for="inputPassword"><b>Blog_video</b></label>
+                                <div class="controls">
+                                <input class="input-field mt-2" type="file" name="video" class="input-file uniform_on" id="fileInput" value="<?php  if(isset ($video_filename)){echo $video_filename;}?>" required>
+                                </div>
+                                </div>
+                              </div>
+                        <!-- post image -->
+                             
+                    </div>
 
                      <div class="row mt-3">
                        <div class="col-md-12">
