@@ -50,7 +50,7 @@
             companion to Benzema's own unique and inimitable skill, style, and
             strong personality. <br />
             FENDI selected talents from the Middle East to join the Launch of
-            the new FENDI FasterSADASDASDSDSADASDASDAS
+            the new FENDI FasterSADASDASDSDSADASDASDAS dasdsadadsdsadada
           </p>
         </div>
         <div class="basis-1/4">
