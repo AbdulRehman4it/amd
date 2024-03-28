@@ -16,7 +16,7 @@
         >
           <div class="pb-8">
             <p class="text-2xl nimbusl-regular text-[#ffffff]">
-              Source : fASHION  
+              Source : fASHION  JASJDL;ASJDL;ASJL;DJASL;JDAL;S 
             </p>
           </div>
         </div>
